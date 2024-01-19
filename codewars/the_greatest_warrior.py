@@ -3,10 +3,10 @@
 
 class Warrior:
     def __init__(self):
-        self.warrior_experience = 100  # every 100 xp, level up
-        self.warrior_level = 1
-        self.warrior_achievements = []
-        self.rank_values = [  # every 10 levels, rank up
+        self.experience = 100
+        self.level = 1
+        self.achievements = []
+        self.rank_values = [
             "Pushover",
             "Novice",
             "Fighter",
@@ -19,33 +19,21 @@ class Warrior:
             "Master",
             "Greatest",
         ]
-        self.warrior_rank = self.rank_values[0]
-
-    def rank(self):
-        return self.warrior_rank
-
-    def level(self):
-        return self.warrior_level
-
-    def experience(self):
-        return self.warrior_experience
-
-    def achievements(self):
-        return self.warrior_achievements
+        self.rank = self.rank_values[0]
 
     def increase_experience(self, amount):
-        self.warrior_experience += amount
-        if self.warrior_experience > 10000:
-            self.warrior_level = 100
-            self.warrior_experience = 10000
-            self.warrior_rank = "Greatest"
+        self.experience += amount
+        if self.experience > 10000:
+            self.level = 100
+            self.experience = 10000
+            self.rank = "Greatest"
         else:
-            self.warrior_level = self.warrior_experience // 100
-            self.warrior_rank = self.rank_values[self.level() // 10]
+            self.level = self.experience // 100
+            self.rank = self.rank_values[self.level // 10]
 
     def training(self, training_instance):
-        if self.warrior_level >= training_instance[2]:
-            self.warrior_achievements.append(training_instance[0])
+        if self.level >= training_instance[2]:
+            self.achievements.append(training_instance[0])
             self.increase_experience(training_instance[1])
             return training_instance[0]
         else:
@@ -54,36 +42,22 @@ class Warrior:
     def battle(self, enemy_level):
         if not 1 <= enemy_level <= 100:
             return "Invalid level"
+        diff = enemy_level - self.level
         enemy_rank = self.rank_values[enemy_level // 10]
-        if enemy_level == self.warrior_level:
+        if enemy_level == self.level:
             self.increase_experience(10)
             return "A good fight"
         elif (
-            enemy_level - self.warrior_level >= 5
-            and self.rank_values.index(enemy_rank)
-            - self.rank_values.index(self.warrior_rank)
+            diff >= 5
+            and self.rank_values.index(enemy_rank) - self.rank_values.index(self.rank)
             >= 1
         ):
             return "You've been defeated"
-        elif enemy_level - self.warrior_level >= 1:
-            self.increase_experience(20 * (pow(enemy_level - self.warrior_level, 2)))
-            if enemy_level - self.warrior_level == 1:
-                return "A good fight"
-            else:
-                return "An intense fight"
-        elif enemy_level - self.warrior_level == -1:
+        elif diff >= 1:
+            self.increase_experience(20 * (pow(diff, 2)))
+            return "An intense fight"
+        elif diff == -1:
             self.increase_experience(5)
+            return "A good fight"
+        elif diff <= -2:
             return "Easy fight"
-        elif enemy_level - self.warrior_level <= -2:
-            return "Easy fight"
-
-
-Dre = Warrior()
-Dre.training(
-    ["Defeated Chuck Norris", 8800, 1]
-)  # Why does printing this "call it twice?"
-print(Dre.achievements())
-print(Dre.experience())
-print(Dre.rank())
-Dre.battle(93)
-print(Dre.experience())
