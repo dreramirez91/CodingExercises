@@ -1,2 +1,6 @@
-*/__pycache__
+# Byte-compiled / optimized / DLL files
+__pycache__/
 advent/.vscode
+
+# Wolf
+.wolf*
