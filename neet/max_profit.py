@@ -1,8 +1,27 @@
 from typing import List
 
 
+def maxProfit(prices):
+    pass
+
+
+print(maxProfit([3, 2, 6, 5, 0, 3]))
+print(maxProfit([2, 3, 6, 5, 0, 3]))
+
+
 # [3, 2, 6, 5, 0, 3] # 4
 def maxProfit(prices: List[int]) -> int:
+    # Solution 3
+    p = 0
+    buy, sell = 0, 1
+    while sell < len(prices):
+        if prices[buy] < prices[sell]:
+            p = max(prices[sell] - prices[buy], p)
+        else:
+            buy = sell
+        sell += 1
+    return p
+
     # Solution 2
     profit = 0
     bought_at = prices[0]
