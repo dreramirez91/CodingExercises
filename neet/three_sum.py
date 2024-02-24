@@ -3,22 +3,44 @@ from typing import List
 
 class Solution:
     def threeSum(self, nums: List[int]) -> List[List[int]]:
-        # Solution 1, 25/312... not finding enough combinations
+        if len(nums) == 3 and sum(nums) == 0:
+            return [nums]
         cleaned_nums = sorted(nums)
         output = []
-        i, j = 0, 3
-        print(cleaned_nums)
-        while j > len(cleaned_nums):
-            total = sum(cleaned_nums[i:j])
-            if total < 0:
-                k -= 1
-            elif total < 0:
-                j += 1
+        i, j = 0, len(cleaned_nums) - 1
+        hashmap = dict()
+        print(cleaned_nums, "\n\n")
+        while i < j:
+            complement = 0 - cleaned_nums[i] - cleaned_nums[j]
+            print("cleaned_nums[i]", "cleaned_nums[j]", "complement")
+            print(
+                "     ",
+                cleaned_nums[i],
+                "           ",
+                cleaned_nums[j],
+                "           ",
+                complement,
+            )
+            print("\nhashmap:", hashmap)
+            print("output:", output, "\n\n")
+            if cleaned_nums[i] in hashmap:
+                old_i, old_j = hashmap.get(cleaned_nums[i])
+                if i != old_i:
+                    output.append(
+                        [cleaned_nums[i], cleaned_nums[old_i], cleaned_nums[old_j]]
+                    )
+            elif cleaned_nums[j] in hashmap:
+                old_i, old_j = hashmap.get(cleaned_nums[j])
+                if j != old_j:
+                    output.append(
+                        [cleaned_nums[i], cleaned_nums[old_i], cleaned_nums[old_j]]
+                    )
             else:
-                output.append([nums[i], nums[j], nums[k]])
-            i += 1
-            j = i + 1
-            k = len(cleaned_nums) - 1
+                hashmap[complement] = (i, j)
+            if cleaned_nums[i] < complement:
+                i += 1
+            else:
+                j -= 1
         return output
 
         # Solution 1, 25/312... not finding enough combinations. Slicing?

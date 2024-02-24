@@ -26,7 +26,6 @@ class Solution:
             n = n // 10
         return output
         # ----- Solution 2 -----
-
         i = 0
         old_sums = set()
         while True:
