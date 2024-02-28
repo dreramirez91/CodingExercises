@@ -52,7 +52,7 @@ class Solution {
         } else if (c == ')' && stack.pop() != '(') {
             return false;
         }
-    }return stack.isEmpty();
+    } return stack.isEmpty();
 }
 }
 

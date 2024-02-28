@@ -1,4 +1,5 @@
 from typing import List
+from rich import print
 
 
 # O(log n) time complexity, continuously cutting the input to processed in half. Requires a sorted input.

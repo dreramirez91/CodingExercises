@@ -13,3 +13,23 @@ print(f"Range time: {range_time} seconds")
 # RESULTS:
 # Enumerate time: 0.20291979098692536 seconds
 # Range time: 0.2211362500092946 seconds
+
+
+def sum_of_squares_silva(values):
+    if not values:
+        return None
+    count = 0
+    for value in values:
+        count += value**2
+    return count
+
+
+def sum_of_squares_erika(values):
+    return sum([v**2 for v in values]) if values else None
+
+
+silvas_time = timeit(lambda: sum_of_squares_silva([1, 2, 3, 4, 5]))
+print("Silva's time:", silvas_time)
+
+erikas_time = timeit(lambda: sum_of_squares_erika([1, 2, 3, 4, 5]))
+print("Erika's time:", erikas_time)
