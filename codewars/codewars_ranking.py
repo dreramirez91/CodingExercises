@@ -28,28 +28,3 @@ class User:
                 self.rank_index = 15
                 self.rank = self.ranks[self.rank_index]
                 self.progress = 0
-
-
-# problem is in the gap, it fucks up all the math so you can use index like if index of incoming score is one greater or do math for it
-user = User()
-user.inc_progress(1)
-user.inc_progress(1)
-user.inc_progress(1)
-user.inc_progress(1)
-user.inc_progress(1)
-user.inc_progress(2)
-user.inc_progress(2)
-user.inc_progress(-1)
-user.inc_progress(3)
-user.inc_progress(8)
-user.inc_progress(8)
-user.inc_progress(8)
-user.inc_progress(8)
-user.inc_progress(8)
-user.inc_progress(8)
-user.inc_progress(8)
-user.inc_progress(8)
-user.inc_progress(8)
-user.inc_progress(8)
-print(user.progress)
-print(user.rank)
