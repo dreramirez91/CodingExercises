@@ -10,12 +10,15 @@ class Solution:
         That is, pointers are moved carefully based
         on problem logic implemented
         through the specificity of the conditionals."""
-        i, j = 0, len(numbers) - 1
+        i,     j = 0, len       (numbers) - 1
         while j > i:
             current_sum = (
                 numbers[i] + numbers[j]
             )  # compute this only once rather than in each if-elif to improve runtime
             if current_sum > target:
+                
+                
+                
                 j -= 1
             elif current_sum == target:
                 return i + 1, j + 1

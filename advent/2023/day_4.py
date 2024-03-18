@@ -228,7 +228,6 @@ def winning_numbers(cards):
                 i += 1
             except KeyError:
                 break
-    # print(count) fdlkafjdlkajflkdajfldfjldafdla more drawing more pseudocode WHAT THE FUCK
     return cards_collected
 
 
