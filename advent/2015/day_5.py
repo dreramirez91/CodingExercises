@@ -14,14 +14,11 @@ def naughty_or_nice(s):
     s_list = s.splitlines()
     for s in s_list:
         repeat, double = False, False
-        for i in range(len(s) - 1):
-            if (s[i] + s[i + 1]) in s[i + 2 :]:
+        for i in range(len(s) - 2):
+            if s[i : i + 2] in s[i + 2 :]:
                 repeat = True
-            try:
-                if s[i] == s[i + 2]:
-                    double = True
-            except IndexError:
-                pass
+            if s[i] == s[i + 2]:
+                double = True
         if repeat and double:
             nice += 1
     return nice

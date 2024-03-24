@@ -1,7 +1,37 @@
 from typing import List
 
 
+# ! No duplicates in the answer
+# ! The answer is a nested list of numbers, not indices
+
+
 class Solution:
+    def threeSum(self, nums: List[int]) -> List[List[int]]:
+        if len(nums) == 3 and sum(nums) == 0:
+            return [nums]
+        nums.sort()  # * Correct!
+        print(nums)
+        hashmap = {}
+        i, j = 0, len(nums) - 1
+        while i < j:
+            hashmap[i, j] = nums[i] + nums[j]
+            i += 1
+            j -= 1
+        print(hashmap)
+        k = 0
+        for k, indices, total in zip(
+            range(len(nums)), hashmap.keys(), hashmap.values()
+        ):
+            if nums[k] + total == 0:
+                ans = [k] + indices
+                print(ans)
+            # if k + sum()
+
+        output = []
+        return output
+
+
+""" class Solution:
     def threeSum(self, nums: List[int]) -> List[List[int]]:
         if len(nums) == 3 and sum(nums) == 0:
             return [nums]
@@ -59,7 +89,7 @@ class Solution:
             j = i + 1
             k = len(cleaned_nums) - 1
         return output
-
+ """
 
 test = Solution()
 print(test.threeSum([-1, 0, 1, 2, -1, -4]))  # [[-1,-1,2],[-1,0,1]]
